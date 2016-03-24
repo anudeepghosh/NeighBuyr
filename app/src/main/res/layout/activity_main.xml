@@ -26,10 +26,16 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
+<<<<<<< HEAD
         app:backgroundTint="@color/colorAccent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="center"
+=======
+        app:backgroundTint="@color/orange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+>>>>>>> remotes/github/master
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:tint="@android:color/white"
