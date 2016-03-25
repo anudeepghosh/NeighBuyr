@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
+import com.example.anudeep.neighbuyr.MainActivity;
+
+
 /**
  * Created by dionysis_lorentzos on 5/8/14
  * for package com.lorentzos.swipecards
@@ -22,7 +25,6 @@ public class FlingCardListener implements View.OnTouchListener {
 
     private static final String TAG = FlingCardListener.class.getSimpleName();
     private static final int INVALID_POINTER_ID = -1;
-
     private final float objectX;
     private final float objectY;
     private final int objectH;
@@ -31,32 +33,31 @@ public class FlingCardListener implements View.OnTouchListener {
     private final FlingListener mFlingListener;
     private final Object dataObject;
     private final float halfWidth;
+    private final int TOUCH_ABOVE = 0;
+    private final int TOUCH_BELOW = 1;
+    private final Object obj = new Object();
+    public ActionDownInterface actionDownInterface;
     private float BASE_ROTATION_DEGREES;
-
     private float aPosX;
     private float aPosY;
     private float aDownTouchX;
     private float aDownTouchY;
-
     // The active pointer is the one currently moving our object.
     private int mActivePointerId = INVALID_POINTER_ID;
     private View frame = null;
-
-
-    private final int TOUCH_ABOVE = 0;
-    private final int TOUCH_BELOW = 1;
     private int touchPosition;
-    private final Object obj = new Object();
     private boolean isAnimationRunning = false;
     private float MAX_COS = (float) Math.cos(Math.toRadians(45));
 
 
     public FlingCardListener(View frame, Object itemAtPosition, FlingListener flingListener) {
         this(frame, itemAtPosition, 15f, flingListener);
+
     }
 
     public FlingCardListener(View frame, Object itemAtPosition, float rotation_degrees, FlingListener flingListener) {
         super();
+
         this.frame = frame;
         this.objectX = frame.getX();
         this.objectY = frame.getY();
@@ -78,6 +79,8 @@ public class FlingCardListener implements View.OnTouchListener {
 
                 // from http://android-developers.blogspot.com/2010/06/making-sense-of-multitouch.html
                 // Save the ID of this pointer
+                MainActivity.removeBackground();
+
 
                 mActivePointerId = event.getPointerId(0);
                 float x = 0;
@@ -343,6 +346,10 @@ public class FlingCardListener implements View.OnTouchListener {
         void onClick(Object dataObject);
 
         void onScroll(float scrollProgressPercent);
+    }
+
+    public interface ActionDownInterface {
+        public void onActionDownPerform();
     }
 
 }

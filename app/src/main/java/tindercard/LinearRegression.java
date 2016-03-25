@@ -1,14 +1,16 @@
 package tindercard;
 
 
-/*************************************************************************
- *  Compilation:  javac LinearRegression.java
- *  Execution:    java  LinearRegression
- *
- *  Compute least squares solution to y = beta * x + alpha.
- *  Simple linear regression.
- *
- *************************************************************************/
+/**
+ * **********************************************************************
+ * Compilation:  javac LinearRegression.java
+ * Execution:    java  LinearRegression
+ * <p/>
+ * Compute least squares solution to y = beta * x + alpha.
+ * Simple linear regression.
+ * <p/>
+ * ***********************************************************************
+ */
 
 
 /**
@@ -45,9 +47,9 @@ class LinearRegression {
 
         // first pass
         double sumx = 0.0, sumy = 0.0, sumx2 = 0.0;
-        for (int i = 0; i < N; i++) sumx  += x[i];
-        for (int i = 0; i < N; i++) sumx2 += x[i]*x[i];
-        for (int i = 0; i < N; i++) sumy  += y[i];
+        for (int i = 0; i < N; i++) sumx += x[i];
+        for (int i = 0; i < N; i++) sumx2 += x[i] * x[i];
+        for (int i = 0; i < N; i++) sumy += y[i];
         double xbar = sumx / N;
         double ybar = sumy / N;
 
@@ -58,23 +60,23 @@ class LinearRegression {
             yybar += (y[i] - ybar) * (y[i] - ybar);
             xybar += (x[i] - xbar) * (y[i] - ybar);
         }
-        beta  = xybar / xxbar;
+        beta = xybar / xxbar;
         alpha = ybar - beta * xbar;
 
         // more statistical analysis
         double rss = 0.0;      // residual sum of squares
         double ssr = 0.0;      // regression sum of squares
         for (int i = 0; i < N; i++) {
-            double fit = beta*x[i] + alpha;
+            double fit = beta * x[i] + alpha;
             rss += (fit - y[i]) * (fit - y[i]);
             ssr += (fit - ybar) * (fit - ybar);
         }
 
-        int degreesOfFreedom = N-2;
-        R2    = ssr / yybar;
-        svar  = rss / degreesOfFreedom;
+        int degreesOfFreedom = N - 2;
+        R2 = ssr / yybar;
+        svar = rss / degreesOfFreedom;
         svar1 = svar / xxbar;
-        svar0 = svar/N + xbar*xbar*svar1;
+        svar0 = svar / N + xbar * xbar * svar1;
     }
 
     /**
@@ -125,7 +127,7 @@ class LinearRegression {
      *    variable <tt>x</tt>
      */
     public double predict(double x) {
-        return beta*x + alpha;
+        return beta * x + alpha;
     }
 
     /**
